@@ -89,6 +89,7 @@ void newAndDelete() {
     std::cout << "Array memory freed and pointer set to nullptr" << '\n';
 
     // --- 3. Smart pointers: unique_ptr ---
+    // ? SEE DIAGRAM: images/unique_ptr.png — shows exclusive ownership, make_unique, and automatic cleanup
     std::cout << "\n--- 3. Smart Pointers: unique_ptr ---" << '\n';
 
     // ! DISCUSSION: The problem with raw new/delete
@@ -115,6 +116,16 @@ void newAndDelete() {
     //        at this level — it's the foundation everything else sits on
 
     // TODO: Create a std::unique_ptr<int> called 'smartValue' using std::make_unique<int>(99)
+    //
+    // ! DISCUSSION: What does 'auto' mean here?
+    //   auto tells the compiler: "figure out the type for me."
+    //   The right-hand side is std::make_unique<int>(99), which returns a
+    //   std::unique_ptr<int> — so that's what smartValue becomes.
+    //   Without auto, you'd write:
+    //     std::unique_ptr<int> smartValue = std::make_unique<int>(99);
+    //   auto avoids repeating the type and keeps the line readable.
+    //   It does NOT mean "untyped" — the type is still fully known at
+    //   compile time, just deduced instead of spelled out.
     //
     // ! DISCUSSION: What is unique_ptr?
     //   unique_ptr is a smart pointer that OWNS the heap memory exclusively.
@@ -159,13 +170,23 @@ void newAndDelete() {
     std::cout << "\nSmart pointers automatically clean up — no delete needed!" << '\n';
 
     // --- 4. Smart pointers: shared_ptr ---
+    // ? SEE DIAGRAM: images/shared_ptr.png — shows shared ownership, make_shared, and reference counting
     std::cout << "\n--- 4. Smart Pointers: shared_ptr ---" << '\n';
 
-    // ! DISCUSSION: unique_ptr vs shared_ptr
-    //   unique_ptr: one owner, no copies allowed (use std::move to transfer)
-    //   shared_ptr: multiple owners, reference counted
-    //   Use unique_ptr by default — it's lighter and makes ownership clear.
-    //   Use shared_ptr only when multiple parts of code need to share ownership.
+    // ! DISCUSSION: unique_ptr vs shared_ptr — quick comparison
+    //
+    //                 unique_ptr              shared_ptr
+    //   ─────────────────────────────────────────────────────
+    //   Owners        ONE only                Multiple (shared)
+    //   Copies?       No (use std::move)      Yes (ref count ++)
+    //   Overhead      Zero extra cost         Control block + count
+    //   Cleanup       When owner dies         When last owner dies
+    //   Create with   std::make_unique<T>()   std::make_shared<T>()
+    //   ─────────────────────────────────────────────────────
+    //
+    //   Rule of thumb: use unique_ptr by default. Only reach for
+    //   shared_ptr when multiple parts of code truly need to share
+    //   ownership of the same object.
 
     // TODO: Create a shared_ptr<int> called 'sharedA' using std::make_shared<int>(77)
 
@@ -176,6 +197,10 @@ void newAndDelete() {
     //   shared_ptr keeps a reference count. When you copy it, the count
     //   goes up. When a copy is destroyed, the count goes down. The
     //   heap memory is only freed when the count reaches zero.
+    //
+    //   You can also std::move a shared_ptr — this transfers ownership
+    //   without touching the ref count (faster than copying, since no
+    //   atomic increment/decrement is needed).
 
     // TODO: Print the value through both pointers and the reference count
     // Expected output: "sharedA value: 77"

@@ -104,7 +104,7 @@
 
   <!-- Freed heap (gone) -->
   <rect x="290" y="445" width="320" height="50" rx="4" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="4,2"/>
-  <text x="450" y="475" text-anchor="middle" fill="#555" font-size="13" font-style="italic">memory returned to system</text>
+  <text x="450" y="475" text-anchor="middle" fill="#9da5b4" font-size="13" font-style="italic">memory returned to system</text>
 
   <!-- Status: safe -->
   <rect x="650" y="450" width="140" height="38" rx="15" fill="#28a74522" stroke="#28a745" stroke-width="1.5"/>

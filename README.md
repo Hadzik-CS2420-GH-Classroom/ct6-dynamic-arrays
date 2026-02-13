@@ -45,6 +45,8 @@ SVG sources are in `images/svg/`, PNG exports in `images/`.
 | Diagram | Referenced In | Shows |
 |---|---|---|
 | `delete_and_nullptr` | `new_and_delete.cpp` | 3-step visual: valid pointer → dangling pointer after `delete[]` → safe state after `nullptr` |
+| `unique_ptr` | `new_and_delete.cpp` | Exclusive ownership, `make_unique` under the hood, move semantics, automatic cleanup |
+| `shared_ptr` | `new_and_delete.cpp` | Shared ownership, `make_shared` under the hood, reference counting lifecycle |
 
 ## Comment Conventions
 
