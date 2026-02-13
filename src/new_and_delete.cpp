@@ -91,6 +91,7 @@ void newAndDelete() {
     std::cout << "Array memory freed and pointer set to nullptr" << '\n';
 
     // --- 3. Smart pointers: unique_ptr ---
+    // ? SEE DIAGRAM: images/unique_ptr.png — shows exclusive ownership, make_unique, and automatic cleanup
     std::cout << "\n--- 3. Smart Pointers: unique_ptr ---" << '\n';
 
     // ! DISCUSSION: The problem with raw new/delete
@@ -163,6 +164,7 @@ void newAndDelete() {
     std::cout << "\nSmart pointers automatically clean up — no delete needed!" << '\n';
 
     // --- 4. Smart pointers: shared_ptr ---
+    // ? SEE DIAGRAM: images/shared_ptr.png — shows shared ownership, make_shared, and reference counting
     std::cout << "\n--- 4. Smart Pointers: shared_ptr ---" << '\n';
 
     // ! DISCUSSION: unique_ptr vs shared_ptr
