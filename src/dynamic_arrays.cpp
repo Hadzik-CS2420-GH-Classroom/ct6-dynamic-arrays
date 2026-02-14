@@ -71,6 +71,7 @@ void dynamicArrays() {
     //   We need to RESIZE before adding more.
 
     // --- 3. Resizing: allocate, copy, delete ---
+    // ? SEE DIAGRAM: images/resize_copy.png — shows full → allocate new → copy → delete old → grow
     std::cout << "\n--- 3. Resizing the Array ---" << '\n';
 
     // ! DISCUSSION: The resize strategy
