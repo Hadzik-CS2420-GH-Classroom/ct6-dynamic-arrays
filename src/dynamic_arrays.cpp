@@ -78,6 +78,11 @@ void dynamicArrays() {
     //   This is the same strategy std::vector uses. The tradeoff is
     //   we may waste up to half the allocated space, but the time
     //   savings are enormous for large arrays.
+    //
+    //   The O(n) and O(1) notation above is called "Big O" — a way to
+    //   describe how an algorithm's cost grows as the input gets larger.
+    //   We'll formalize Big O when we hit linked lists, where the
+    //   contrast with arrays makes it really click.
 
     std::cout << "Array is full (count == capacity). Need to resize!" << '\n';
 
