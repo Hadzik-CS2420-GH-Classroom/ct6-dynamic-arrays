@@ -79,10 +79,10 @@
   <text x="708" y="164" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">4</text>
 
   <!-- Index labels for row 0 -->
-  <text x="450" y="186" text-anchor="middle" fill="#888" font-size="9">[0][0]</text>
-  <text x="536" y="186" text-anchor="middle" fill="#888" font-size="9">[0][1]</text>
-  <text x="622" y="186" text-anchor="middle" fill="#888" font-size="9">[0][2]</text>
-  <text x="708" y="186" text-anchor="middle" fill="#888" font-size="9">[0][3]</text>
+  <text x="450" y="186" text-anchor="middle" fill="#aaa" font-size="9">[0][0]</text>
+  <text x="536" y="186" text-anchor="middle" fill="#aaa" font-size="9">[0][1]</text>
+  <text x="622" y="186" text-anchor="middle" fill="#aaa" font-size="9">[0][2]</text>
+  <text x="708" y="186" text-anchor="middle" fill="#aaa" font-size="9">[0][3]</text>
 
   <!-- ========== ROW 1 ========== -->
   <!-- Arrow from table[1] to row 1 -->
