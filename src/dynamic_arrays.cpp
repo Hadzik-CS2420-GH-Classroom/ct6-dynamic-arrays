@@ -23,6 +23,14 @@ void dynamicArrays() {
     //     2. Copy existing elements into it
     //     3. Delete the old array
     //   This is exactly what std::vector does behind the scenes!
+    //
+    // ! DISCUSSION: "Wait — didn't we just learn smart pointers are better?"
+    //   Yes! In your own code, prefer smart pointers and std::vector.
+    //   Here we use raw new/delete ON PURPOSE because we're building
+    //   the internals of a container — this is what std::vector does
+    //   under the hood. You need to understand this level so you can
+    //   debug containers, implement data structures (linked lists,
+    //   trees), and work with APIs that hand you raw pointers.
 
     // --- 1. Setting up a dynamic array ---
     std::cout << "\n--- 1. Initial Dynamic Array ---" << '\n';
