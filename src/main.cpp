@@ -11,11 +11,11 @@ int main() {
     // Topic 1: The new and delete operators (shared_ptr and unique_ptr allowed)
     newAndDelete();
 
-    // Topic 2: Two dimensional arrays
-    twoDimensionalArrays();
-
-    // Topic 3: Dynamic arrays (resize + copy)
+    // Topic 2: Dynamic arrays (resize + copy)
     dynamicArrays();
+
+    // Topic 3: Two dimensional arrays
+    twoDimensionalArrays();
 
     std::cout << "\n======================================================" << '\n';
     std::cout << "CT6 Complete!" << '\n';
