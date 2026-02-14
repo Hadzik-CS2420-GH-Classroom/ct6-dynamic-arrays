@@ -9,8 +9,8 @@ An in-class code-together activity covering heap allocation, dynamic memory mana
 | File | Focus | TODOs |
 |---|---|---|
 | `new_and_delete.cpp` | `new[]`/`delete[]` for arrays, `unique_ptr`, `shared_ptr` | 13 |
-| `two_dimensional_arrays.cpp` | Dynamic 2D arrays (pointer-to-pointer and flat) | 11 |
 | `dynamic_arrays.cpp` | Resize + copy pattern (how `std::vector` works) | 18 |
+| `two_dimensional_arrays.cpp` | Dynamic 2D arrays (pointer-to-pointer and flat) | 11 |
 
 ## Teaching Order
 
@@ -23,20 +23,20 @@ Work through the files in the order `main.cpp` calls them:
 3. **`unique_ptr`** — automatic cleanup, `make_unique`, array support (the "better way")
 4. **`shared_ptr`** — shared ownership, reference counting
 
-### 2. `two_dimensional_arrays.cpp` — Applying new/delete
-
-1. **Static 2D arrays** — quick review of stack-based `int grid[2][3]`
-2. **Dynamic 2D arrays** — pointer-to-pointer (`int**`), allocating spine + rows
-3. **Freeing 2D arrays** — reverse order: rows first, then spine
-4. **Flat array as 2D** — single allocation with index math (`row * cols + col`)
-
-### 3. `dynamic_arrays.cpp` — The Big Picture
+### 2. `dynamic_arrays.cpp` — The Big Picture
 
 1. **Initial dynamic array** — capacity vs count, allocating with `new`
 2. **Adding elements** — filling the array, hitting capacity
 3. **Resizing** — double capacity, allocate new, copy, delete old
 4. **Adding after resize** — using the extra capacity
 5. **Cleanup** — freeing the final array
+
+### 3. `two_dimensional_arrays.cpp` — Applying new/delete in 2D
+
+1. **Static 2D arrays** — quick review of stack-based `int grid[2][3]`
+2. **Dynamic 2D arrays** — pointer-to-pointer (`int**`), allocating spine + rows
+3. **Freeing 2D arrays** — reverse order: rows first, then spine
+4. **Flat array as 2D** — single allocation with index math (`row * cols + col`)
 
 ## Diagrams
 
