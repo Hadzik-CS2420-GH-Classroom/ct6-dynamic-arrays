@@ -45,11 +45,7 @@ void twoDimensionalArrays() {
     // ! DISCUSSION: The "pointer to pointer" pattern
     //   int** table creates a pointer that points to an array of int*.
     //   Each int* in that array points to a row of ints.
-    //   It's a 2-level indirection:
-    //     table  -->  [row0*, row1*, row2*]
-    //                   |        |       |
-    //                   v        v       v
-    //                  [1,2,3,4] [5,6,7,8] [9,10,11,12]
+    //   It's a 2-level indirection — see the diagram above.
 
     // SOLUTION: Allocate an array of int* pointers with 'rows' elements
     int** table = new int*[rows];
