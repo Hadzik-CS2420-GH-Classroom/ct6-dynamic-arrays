@@ -110,6 +110,7 @@ void twoDimensionalArrays() {
     std::cout << "2D array memory freed (rows first, then spine)" << '\n';
 
     // --- 4. Flat 1D array as a 2D array ---
+    // ? SEE DIAGRAM: images/two_d_flat.png — flat array layout, index formula, and comparison
     std::cout << "\n--- 4. Flat Array as 2D (Alternative Approach) ---" << '\n';
 
     // ! DISCUSSION: The pointer-to-pointer approach has downsides:
