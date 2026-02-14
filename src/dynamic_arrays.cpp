@@ -140,6 +140,13 @@ void dynamicArrays() {
     // ! DISCUSSION: After arr = newArr, both pointers refer to the same memory.
     //   We don't delete newArr separately — arr now "owns" it.
     //   We just moved ownership from the old block to the new one.
+    //
+    //   "Don't we need to set newArr to nullptr too?"
+    //   No — newArr is a local variable that we never use again after
+    //   this line. It's NOT dangling: the memory it points to is still
+    //   alive (arr is using it). Setting it to nullptr would be harmless
+    //   but pointless. We only nullptr a pointer when we might
+    //   accidentally use it later — newArr just falls out of scope.
 
     std::cout << "Resized!";
     // SOLUTION: Call printArray to display the state
