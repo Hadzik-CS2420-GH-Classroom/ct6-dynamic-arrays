@@ -8,6 +8,8 @@ void twoDimensionalArrays() {
     // --- 1. Static 2D arrays (review) ---
     std::cout << "\n--- 1. Static 2D Arrays (Review) ---" << '\n';
 
+    // ? SEE DIAGRAM: images/static_2d_array.png — conceptual grid vs actual flat memory layout
+    //
     // ! DISCUSSION: A 2D array is an "array of arrays"
     //   int grid[2][3] creates 2 rows, each with 3 columns.
     //   In memory, it's laid out as one contiguous block:
