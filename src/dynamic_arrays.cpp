@@ -86,7 +86,7 @@ void dynamicArrays() {
     //   We DOUBLE the capacity each time we run out of space.
     //   Why double instead of adding 1?
     //     - Adding 1: resize on EVERY insertion → O(n) copies each time
-    //     - Doubling: resize rarely → O(1) amortized per insertion
+    //     - Doubling: resize rarely → O(1) on average per insertion
     //   This is the same strategy std::vector uses. The tradeoff is
     //   we may waste up to half the allocated space, but the time
     //   savings are enormous for large arrays.
