@@ -114,12 +114,11 @@ void dynamicArrays() {
         newArr[i] = arr[i];
     }
     //
-    // ! DISCUSSION: Why copy manually instead of memcpy?
-    //   For plain ints, memcpy works fine. But for objects with
-    //   constructors/destructors (like std::string), you MUST use
-    //   proper copying (assignment operator or std::copy) so that
-    //   objects are correctly constructed in the new location.
-    //   Getting in the habit of loop-copying is safer.
+    // ! DISCUSSION: Why use a loop instead of a bulk copy?
+    //   For plain ints a raw byte copy would work, but for objects
+    //   with constructors/destructors (like std::string) you MUST
+    //   use proper assignment so each object is correctly constructed
+    //   in the new location. Loop-copying is the safe, general habit.
 
     std::cout << "Copied " << count << " elements to new array" << '\n';
 
