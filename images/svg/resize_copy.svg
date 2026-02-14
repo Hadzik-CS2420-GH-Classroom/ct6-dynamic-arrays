@@ -20,6 +20,14 @@
   <!-- Title -->
   <text x="430" y="35" text-anchor="middle" fill="#569cd6" font-size="18" font-weight="bold">Dynamic Array — Resize + Copy (How std::vector Works)</text>
 
+  <!--
+    Cell geometry (consistent across all 3 steps):
+    Each cell: 75px wide, 5px gap between
+    8 cells from x=175: 175, 255, 335, 415, 495, 575, 655, 735
+    Cell centers:        212, 292, 372, 452, 532, 612, 692, 772
+    Outer box starts x=170 to give 5px padding on left
+  -->
+
   <!-- ============================================================ -->
   <!-- STEP 1: Array is full                                         -->
   <!-- ============================================================ -->
@@ -34,38 +42,37 @@
   <!-- Arrow from arr to heap array -->
   <line x1="110" y1="128" x2="165" y2="128" stroke="#569cd6" stroke-width="2" marker-end="url(#arrow)"/>
 
-  <!-- Heap array: capacity=4, all filled -->
-  <rect x="175" y="108" width="400" height="45" rx="4" fill="#2d2d2d" stroke="#d7ba7d" stroke-width="2"/>
-  <text x="375" y="103" text-anchor="middle" fill="#d7ba7d" font-size="10">capacity = 4</text>
+  <!-- Heap array: capacity=4 -->
+  <rect x="170" y="108" width="330" height="45" rx="4" fill="#2d2d2d" stroke="#d7ba7d" stroke-width="2"/>
+  <text x="335" y="103" text-anchor="middle" fill="#d7ba7d" font-size="10">capacity = 4</text>
 
   <!-- Cell 0: 10 -->
-  <rect x="185" y="115" width="90" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
-  <text x="230" y="135" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">10</text>
+  <rect x="175" y="115" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
+  <text x="212" y="135" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">10</text>
 
   <!-- Cell 1: 20 -->
-  <rect x="280" y="115" width="90" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
-  <text x="325" y="135" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">20</text>
+  <rect x="255" y="115" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
+  <text x="292" y="135" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">20</text>
 
   <!-- Cell 2: 30 -->
-  <rect x="375" y="115" width="90" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
-  <text x="420" y="135" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">30</text>
+  <rect x="335" y="115" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
+  <text x="372" y="135" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">30</text>
 
   <!-- Cell 3: 40 -->
-  <rect x="470" y="115" width="90" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
-  <text x="515" y="135" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">40</text>
+  <rect x="415" y="115" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
+  <text x="452" y="135" text-anchor="middle" fill="#b5cea8" font-size="14" font-weight="bold">40</text>
 
   <!-- count bracket -->
-  <line x1="185" y1="150" x2="560" y2="150" stroke="#dcdcaa" stroke-width="1.5"/>
-  <text x="372" y="165" text-anchor="middle" fill="#dcdcaa" font-size="10">count = 4 (all slots used)</text>
+  <line x1="175" y1="150" x2="490" y2="150" stroke="#dcdcaa" stroke-width="1.5"/>
+  <text x="332" y="165" text-anchor="middle" fill="#dcdcaa" font-size="10">count = 4 (all slots used)</text>
 
   <!-- FULL badge -->
-  <rect x="600" y="112" width="115" height="36" rx="15" fill="#dc354522" stroke="#dc3545" stroke-width="1.5"/>
-  <text x="657" y="135" text-anchor="middle" fill="#dc3545" font-size="12" font-weight="bold">FULL! ✕</text>
+  <rect x="520" y="112" width="115" height="36" rx="15" fill="#dc354522" stroke="#dc3545" stroke-width="1.5"/>
+  <text x="577" y="135" text-anchor="middle" fill="#dc3545" font-size="12" font-weight="bold">FULL! ✕</text>
 
   <!-- Warning text -->
-  <text x="730" y="128" fill="#9da5b4" font-size="10">arr[4] = 50</text>
-  <text x="730" y="143" fill="#dc3545" font-size="10">← undefined</text>
-  <text x="730" y="156" fill="#dc3545" font-size="10">   behavior!</text>
+  <text x="655" y="128" fill="#9da5b4" font-size="10">arr[4] = 50</text>
+  <text x="655" y="143" fill="#dc3545" font-size="10">← undefined behavior!</text>
 
   <!-- ============================================================ -->
   <!-- STEP 2: Allocate new, copy, delete old                       -->
@@ -85,133 +92,134 @@
   <line x1="110" y1="290" x2="165" y2="290" stroke="#dc3545" stroke-width="2" stroke-dasharray="4,2" marker-end="url(#arrow-red)"/>
 
   <!-- Old heap array (being deleted) -->
-  <rect x="175" y="272" width="400" height="42" rx="4" fill="#3d2020" stroke="#dc354580" stroke-width="1.5" stroke-dasharray="4,2"/>
-  <text x="375" y="266" text-anchor="middle" fill="#dc3545" font-size="10">OLD — will be deleted</text>
+  <rect x="170" y="272" width="330" height="42" rx="4" fill="#3d2020" stroke="#dc354580" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="335" y="266" text-anchor="middle" fill="#dc3545" font-size="10">OLD — delete[] arr</text>
 
-  <rect x="185" y="279" width="90" height="28" rx="3" fill="#1e1e1e55" stroke="#dc354533" stroke-width="1"/>
-  <text x="230" y="298" text-anchor="middle" fill="#b5cea855" font-size="13">10</text>
+  <rect x="175" y="279" width="75" height="28" rx="3" fill="#1e1e1e55" stroke="#dc354533" stroke-width="1"/>
+  <text x="212" y="298" text-anchor="middle" fill="#b5cea855" font-size="13">10</text>
 
-  <rect x="280" y="279" width="90" height="28" rx="3" fill="#1e1e1e55" stroke="#dc354533" stroke-width="1"/>
-  <text x="325" y="298" text-anchor="middle" fill="#b5cea855" font-size="13">20</text>
+  <rect x="255" y="279" width="75" height="28" rx="3" fill="#1e1e1e55" stroke="#dc354533" stroke-width="1"/>
+  <text x="292" y="298" text-anchor="middle" fill="#b5cea855" font-size="13">20</text>
 
-  <rect x="375" y="279" width="90" height="28" rx="3" fill="#1e1e1e55" stroke="#dc354533" stroke-width="1"/>
-  <text x="420" y="298" text-anchor="middle" fill="#b5cea855" font-size="13">30</text>
+  <rect x="335" y="279" width="75" height="28" rx="3" fill="#1e1e1e55" stroke="#dc354533" stroke-width="1"/>
+  <text x="372" y="298" text-anchor="middle" fill="#b5cea855" font-size="13">30</text>
 
-  <rect x="470" y="279" width="90" height="28" rx="3" fill="#1e1e1e55" stroke="#dc354533" stroke-width="1"/>
-  <text x="515" y="298" text-anchor="middle" fill="#b5cea855" font-size="13">40</text>
+  <rect x="415" y="279" width="75" height="28" rx="3" fill="#1e1e1e55" stroke="#dc354533" stroke-width="1"/>
+  <text x="452" y="298" text-anchor="middle" fill="#b5cea855" font-size="13">40</text>
 
-  <!-- Copy arrows from old to new -->
-  <line x1="230" y1="314" x2="230" y2="372" stroke="#dcdcaa" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-amber)"/>
-  <line x1="325" y1="314" x2="325" y2="372" stroke="#dcdcaa" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-amber)"/>
-  <line x1="420" y1="314" x2="420" y2="372" stroke="#dcdcaa" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-amber)"/>
-  <line x1="515" y1="314" x2="515" y2="372" stroke="#dcdcaa" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-amber)"/>
+  <!-- Copy arrows — perfectly aligned old centers → new centers -->
+  <line x1="212" y1="310" x2="212" y2="375" stroke="#dcdcaa" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-amber)"/>
+  <line x1="292" y1="310" x2="292" y2="375" stroke="#dcdcaa" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-amber)"/>
+  <line x1="372" y1="310" x2="372" y2="375" stroke="#dcdcaa" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-amber)"/>
+  <line x1="452" y1="310" x2="452" y2="375" stroke="#dcdcaa" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#arrow-amber)"/>
 
-  <!-- Copy label -->
-  <text x="600" y="350" fill="#dcdcaa" font-size="11" font-weight="bold">copy</text>
-  <text x="600" y="366" fill="#9da5b4" font-size="10">newArr[i] = arr[i]</text>
+  <!-- Copy label centered between the arrows -->
+  <text x="530" y="340" fill="#dcdcaa" font-size="12" font-weight="bold">copy each element ↓</text>
+  <text x="530" y="358" fill="#9da5b4" font-size="11">for (i = 0; i &lt; count; ++i)</text>
+  <text x="540" y="374" fill="#dcdcaa" font-size="11">newArr[i] = arr[i];</text>
 
   <!-- newArr pointer -->
-  <rect x="30" y="380" width="80" height="40" rx="6" fill="#2d2d2d" stroke="#4ec9b0" stroke-width="2"/>
-  <text x="70" y="396" text-anchor="middle" fill="#4ec9b0" font-size="10" font-weight="bold">int*</text>
-  <text x="70" y="412" text-anchor="middle" fill="#9cdcfe" font-size="12">newArr</text>
+  <rect x="30" y="383" width="80" height="40" rx="6" fill="#2d2d2d" stroke="#4ec9b0" stroke-width="2"/>
+  <text x="70" y="399" text-anchor="middle" fill="#4ec9b0" font-size="10" font-weight="bold">int*</text>
+  <text x="70" y="415" text-anchor="middle" fill="#9cdcfe" font-size="12">newArr</text>
 
   <!-- Arrow from newArr to new heap -->
-  <line x1="110" y1="400" x2="165" y2="400" stroke="#4ec9b0" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <line x1="110" y1="403" x2="165" y2="403" stroke="#4ec9b0" stroke-width="2" marker-end="url(#arrow-green)"/>
 
-  <!-- New heap array: capacity=8, 4 filled + 4 empty -->
-  <rect x="175" y="378" width="650" height="45" rx="4" fill="#2d2d2d" stroke="#4ec9b0" stroke-width="2"/>
-  <text x="500" y="373" text-anchor="middle" fill="#4ec9b0" font-size="10">NEW — newCapacity = 8</text>
+  <!-- New heap array: capacity=8 -->
+  <rect x="170" y="381" width="650" height="45" rx="4" fill="#2d2d2d" stroke="#4ec9b0" stroke-width="2"/>
+  <text x="495" y="376" text-anchor="middle" fill="#4ec9b0" font-size="10">NEW — newCapacity = 8</text>
 
-  <!-- Copied cells -->
-  <rect x="185" y="386" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#4ec9b055" stroke-width="1"/>
-  <text x="221" y="405" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">10</text>
+  <!-- Copied cells (same x positions as old) -->
+  <rect x="175" y="389" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#4ec9b055" stroke-width="1"/>
+  <text x="212" y="408" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">10</text>
 
-  <rect x="262" y="386" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#4ec9b055" stroke-width="1"/>
-  <text x="298" y="405" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">20</text>
+  <rect x="255" y="389" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#4ec9b055" stroke-width="1"/>
+  <text x="292" y="408" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">20</text>
 
-  <rect x="339" y="386" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#4ec9b055" stroke-width="1"/>
-  <text x="375" y="405" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">30</text>
+  <rect x="335" y="389" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#4ec9b055" stroke-width="1"/>
+  <text x="372" y="408" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">30</text>
 
-  <rect x="416" y="386" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#4ec9b055" stroke-width="1"/>
-  <text x="452" y="405" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">40</text>
+  <rect x="415" y="389" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#4ec9b055" stroke-width="1"/>
+  <text x="452" y="408" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">40</text>
 
   <!-- Empty cells -->
-  <rect x="493" y="386" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="3,2"/>
-  <text x="529" y="405" text-anchor="middle" fill="#555" font-size="11">—</text>
+  <rect x="495" y="389" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="532" y="408" text-anchor="middle" fill="#555" font-size="11">—</text>
 
-  <rect x="570" y="386" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="3,2"/>
-  <text x="606" y="405" text-anchor="middle" fill="#555" font-size="11">—</text>
+  <rect x="575" y="389" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="612" y="408" text-anchor="middle" fill="#555" font-size="11">—</text>
 
-  <rect x="647" y="386" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="3,2"/>
-  <text x="683" y="405" text-anchor="middle" fill="#555" font-size="11">—</text>
+  <rect x="655" y="389" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="692" y="408" text-anchor="middle" fill="#555" font-size="11">—</text>
 
-  <rect x="724" y="386" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="3,2"/>
-  <text x="760" y="405" text-anchor="middle" fill="#555" font-size="11">—</text>
+  <rect x="735" y="389" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="772" y="408" text-anchor="middle" fill="#555" font-size="11">—</text>
 
   <!-- Delete old + update pointer code -->
-  <rect x="30" y="440" width="540" height="55" rx="4" fill="#2d2d2d" stroke="#555" stroke-width="1"/>
-  <text x="45" y="460" fill="#dc3545" font-size="12">delete[] arr;             <tspan fill="#6a9955">// Step 4: free old memory</tspan></text>
-  <text x="45" y="480" fill="#4ec9b0" font-size="12">arr = newArr;             <tspan fill="#6a9955">// Step 5: point to new array</tspan></text>
+  <rect x="30" y="443" width="540" height="55" rx="4" fill="#2d2d2d" stroke="#555" stroke-width="1"/>
+  <text x="45" y="463" fill="#dc3545" font-size="12">delete[] arr;             <tspan fill="#6a9955">// Step 4: free old memory</tspan></text>
+  <text x="45" y="483" fill="#4ec9b0" font-size="12">arr = newArr;             <tspan fill="#6a9955">// Step 5: point to new array</tspan></text>
 
   <!-- capacity update -->
-  <rect x="585" y="440" width="245" height="55" rx="4" fill="#2d2d2d" stroke="#555" stroke-width="1"/>
-  <text x="600" y="460" fill="#4ec9b0" font-size="12">capacity = newCapacity;</text>
-  <text x="600" y="480" fill="#9da5b4" font-size="11">// capacity is now 8</text>
+  <rect x="585" y="443" width="245" height="55" rx="4" fill="#2d2d2d" stroke="#555" stroke-width="1"/>
+  <text x="600" y="463" fill="#4ec9b0" font-size="12">capacity = newCapacity;</text>
+  <text x="600" y="483" fill="#9da5b4" font-size="11">// capacity is now 8</text>
 
   <!-- ============================================================ -->
   <!-- STEP 3: After resize — room to grow                          -->
   <!-- ============================================================ -->
-  <line x1="30" y1="515" x2="830" y2="515" stroke="#555" stroke-width="1" stroke-dasharray="6,3"/>
+  <line x1="30" y1="518" x2="830" y2="518" stroke="#555" stroke-width="1" stroke-dasharray="6,3"/>
 
-  <text x="30" y="545" fill="#28a745" font-size="15" font-weight="bold">Step 3: After resize — room to grow!</text>
-  <text x="30" y="565" fill="#608b4e" font-size="12">arr[count] = 50; count++;  arr[count] = 60; count++;  arr[count] = 70; count++;</text>
+  <text x="30" y="548" fill="#28a745" font-size="15" font-weight="bold">Step 3: After resize — room to grow!</text>
+  <text x="30" y="568" fill="#608b4e" font-size="12">arr[count] = 50; count++;  arr[count] = 60; count++;  arr[count] = 70; count++;</text>
 
   <!-- arr pointer (now pointing to new array) -->
-  <rect x="30" y="580" width="80" height="40" rx="6" fill="#2d2d2d" stroke="#28a745" stroke-width="2"/>
-  <text x="70" y="596" text-anchor="middle" fill="#28a745" font-size="10" font-weight="bold">int*</text>
-  <text x="70" y="612" text-anchor="middle" fill="#9cdcfe" font-size="12">arr</text>
+  <rect x="30" y="583" width="80" height="40" rx="6" fill="#2d2d2d" stroke="#28a745" stroke-width="2"/>
+  <text x="70" y="599" text-anchor="middle" fill="#28a745" font-size="10" font-weight="bold">int*</text>
+  <text x="70" y="615" text-anchor="middle" fill="#9cdcfe" font-size="12">arr</text>
 
   <!-- Arrow from arr to heap -->
-  <line x1="110" y1="600" x2="165" y2="600" stroke="#28a745" stroke-width="2" marker-end="url(#arrow-green)"/>
+  <line x1="110" y1="603" x2="165" y2="603" stroke="#28a745" stroke-width="2" marker-end="url(#arrow-green)"/>
 
   <!-- Final heap array: capacity=8, count=7 -->
-  <rect x="175" y="580" width="650" height="45" rx="4" fill="#2d2d2d" stroke="#28a745" stroke-width="2"/>
-  <text x="500" y="575" text-anchor="middle" fill="#28a745" font-size="10">capacity = 8</text>
+  <rect x="170" y="581" width="650" height="45" rx="4" fill="#2d2d2d" stroke="#28a745" stroke-width="2"/>
+  <text x="495" y="576" text-anchor="middle" fill="#28a745" font-size="10">capacity = 8</text>
 
   <!-- Original 4 values -->
-  <rect x="185" y="588" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
-  <text x="221" y="607" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">10</text>
+  <rect x="175" y="589" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
+  <text x="212" y="608" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">10</text>
 
-  <rect x="262" y="588" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
-  <text x="298" y="607" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">20</text>
+  <rect x="255" y="589" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
+  <text x="292" y="608" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">20</text>
 
-  <rect x="339" y="588" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
-  <text x="375" y="607" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">30</text>
+  <rect x="335" y="589" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
+  <text x="372" y="608" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">30</text>
 
-  <rect x="416" y="588" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
-  <text x="452" y="607" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">40</text>
+  <rect x="415" y="589" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#569cd655" stroke-width="1"/>
+  <text x="452" y="608" text-anchor="middle" fill="#b5cea8" font-size="13" font-weight="bold">40</text>
 
   <!-- New values added after resize -->
-  <rect x="493" y="588" width="72" height="30" rx="3" fill="#28a74522" stroke="#28a745" stroke-width="1.5"/>
-  <text x="529" y="607" text-anchor="middle" fill="#28a745" font-size="13" font-weight="bold">50</text>
+  <rect x="495" y="589" width="75" height="30" rx="3" fill="#28a74522" stroke="#28a745" stroke-width="1.5"/>
+  <text x="532" y="608" text-anchor="middle" fill="#28a745" font-size="13" font-weight="bold">50</text>
 
-  <rect x="570" y="588" width="72" height="30" rx="3" fill="#28a74522" stroke="#28a745" stroke-width="1.5"/>
-  <text x="606" y="607" text-anchor="middle" fill="#28a745" font-size="13" font-weight="bold">60</text>
+  <rect x="575" y="589" width="75" height="30" rx="3" fill="#28a74522" stroke="#28a745" stroke-width="1.5"/>
+  <text x="612" y="608" text-anchor="middle" fill="#28a745" font-size="13" font-weight="bold">60</text>
 
-  <rect x="647" y="588" width="72" height="30" rx="3" fill="#28a74522" stroke="#28a745" stroke-width="1.5"/>
-  <text x="683" y="607" text-anchor="middle" fill="#28a745" font-size="13" font-weight="bold">70</text>
+  <rect x="655" y="589" width="75" height="30" rx="3" fill="#28a74522" stroke="#28a745" stroke-width="1.5"/>
+  <text x="692" y="608" text-anchor="middle" fill="#28a745" font-size="13" font-weight="bold">70</text>
 
   <!-- Last empty slot -->
-  <rect x="724" y="588" width="72" height="30" rx="3" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="3,2"/>
-  <text x="760" y="607" text-anchor="middle" fill="#555" font-size="11">—</text>
+  <rect x="735" y="589" width="75" height="30" rx="3" fill="#1e1e1e" stroke="#55555555" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="772" y="608" text-anchor="middle" fill="#555" font-size="11">—</text>
 
   <!-- count bracket -->
-  <line x1="185" y1="625" x2="719" y2="625" stroke="#dcdcaa" stroke-width="1.5"/>
+  <line x1="175" y1="625" x2="730" y2="625" stroke="#dcdcaa" stroke-width="1.5"/>
   <text x="452" y="640" text-anchor="middle" fill="#dcdcaa" font-size="10">count = 7</text>
 
   <!-- capacity bracket -->
-  <line x1="185" y1="648" x2="796" y2="648" stroke="#28a745" stroke-width="1" stroke-dasharray="3,2"/>
-  <text x="490" y="662" text-anchor="middle" fill="#28a745" font-size="10">capacity = 8 (1 slot remaining — no resize needed yet)</text>
+  <line x1="175" y1="648" x2="810" y2="648" stroke="#28a745" stroke-width="1" stroke-dasharray="3,2"/>
+  <text x="492" y="662" text-anchor="middle" fill="#28a745" font-size="10">capacity = 8 (1 slot remaining — no resize needed yet)</text>
 
   <!-- Bottom summary -->
   <rect x="50" y="685" width="760" height="42" rx="6" fill="#c586c015" stroke="#c586c0" stroke-width="1"/>
