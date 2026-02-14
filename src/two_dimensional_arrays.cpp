@@ -29,6 +29,7 @@ void twoDimensionalArrays() {
     }
 
     // --- 2. Dynamic 2D array with new ---
+    // ? SEE DIAGRAM: images/two_d_array_memory.png — shows pointer-to-pointer vs flat memory layout
     std::cout << "\n--- 2. Dynamic 2D Array (Heap Allocated) ---" << '\n';
 
     int rows = 3;
