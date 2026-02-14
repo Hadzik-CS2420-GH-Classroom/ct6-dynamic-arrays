@@ -26,7 +26,7 @@
   <text x="90" y="160" text-anchor="middle" fill="#9cdcfe" font-size="13">table</text>
 
   <!-- Arrow from table to spine -->
-  <line x1="150" y1="145" x2="248" y2="145" stroke="#c586c0" stroke-width="2" marker-end="url(#arrow-pink)"/>
+  <line x1="150" y1="145" x2="260" y2="145" stroke="#c586c0" stroke-width="2" marker-end="url(#arrow-pink)"/>
 
   <!-- Spine: array of 3 int* pointers -->
   <rect x="260" y="112" width="140" height="156" rx="6" fill="#2d2d2d" stroke="#569cd6" stroke-width="2"/>
