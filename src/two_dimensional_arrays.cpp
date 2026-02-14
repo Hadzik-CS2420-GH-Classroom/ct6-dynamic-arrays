@@ -31,7 +31,6 @@ void twoDimensionalArrays() {
     }
 
     // --- 2. Dynamic 2D array with new ---
-    // ? SEE DIAGRAM: images/two_d_array_memory.png — shows pointer-to-pointer vs flat memory layout
     std::cout << "\n--- 2. Dynamic 2D Array (Heap Allocated) ---" << '\n';
 
     int rows = 3;
@@ -47,6 +46,8 @@ void twoDimensionalArrays() {
     //   Each int* in that array points to a row of ints.
     //   So you follow two pointers to reach a value — see the diagram above.
 
+    // ? SEE DIAGRAM: images/two_d_spine.png — what the spine allocation looks like
+    //
     // SOLUTION: Allocate an array of int* pointers with 'rows' elements
     int** table = new int*[rows];
     //
@@ -59,6 +60,8 @@ void twoDimensionalArrays() {
     for (int i = 0; i < rows; ++i) {
         table[i] = new int[cols];
     }
+    //
+    // ? SEE DIAGRAM: images/two_d_rows.png — full picture after loop + delete order + flat alternative
     //
     // ! DISCUSSION: Why two separate allocations?
     //   The first new creates the "spine" (array of row pointers).
