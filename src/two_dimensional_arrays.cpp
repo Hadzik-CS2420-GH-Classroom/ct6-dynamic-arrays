@@ -8,6 +8,8 @@ void twoDimensionalArrays() {
     // --- 1. Static 2D arrays (review) ---
     std::cout << "\n--- 1. Static 2D Arrays (Review) ---" << '\n';
 
+    // ? SEE DIAGRAM: images/static_2d_array.png — conceptual grid vs actual flat memory layout
+    //
     // ! DISCUSSION: A 2D array is an "array of arrays"
     //   int grid[2][3] creates 2 rows, each with 3 columns.
     //   In memory, it's laid out as one contiguous block:
@@ -29,7 +31,6 @@ void twoDimensionalArrays() {
     }
 
     // --- 2. Dynamic 2D array with new ---
-    // ? SEE DIAGRAM: images/two_d_array_memory.png — shows pointer-to-pointer vs flat memory layout
     std::cout << "\n--- 2. Dynamic 2D Array (Heap Allocated) ---" << '\n';
 
     int rows = 3;
@@ -43,12 +44,10 @@ void twoDimensionalArrays() {
     // ! DISCUSSION: The "pointer to pointer" pattern
     //   int** table creates a pointer that points to an array of int*.
     //   Each int* in that array points to a row of ints.
-    //   It's a 2-level indirection:
-    //     table  -->  [row0*, row1*, row2*]
-    //                   |        |       |
-    //                   v        v       v
-    //                  [1,2,3,4] [5,6,7,8] [9,10,11,12]
+    //   So you follow two pointers to reach a value — see the diagram above.
 
+    // ? SEE DIAGRAM: images/two_d_spine.png — what the spine allocation looks like
+    //
     // TODO: Allocate an array of int* pointers with 'rows' elements
     //       Store it in int** called 'table'
     //       Hint: int** table = new int*[rows];
@@ -59,6 +58,8 @@ void twoDimensionalArrays() {
     //   We need a second step to allocate each row.
 
     // TODO: Use a for loop to allocate each row: table[i] = new int[cols];
+    //
+    // ? SEE DIAGRAM: images/two_d_rows.png — full picture after loop + delete order + flat alternative
     //
     // ! DISCUSSION: Why two separate allocations?
     //   The first new creates the "spine" (array of row pointers).
@@ -98,6 +99,7 @@ void twoDimensionalArrays() {
     std::cout << "2D array memory freed (rows first, then spine)" << '\n';
 
     // --- 4. Flat 1D array as a 2D array ---
+    // ? SEE DIAGRAM: images/two_d_flat.png — flat array layout, index formula, and comparison
     std::cout << "\n--- 4. Flat Array as 2D (Alternative Approach) ---" << '\n';
 
     // ! DISCUSSION: The pointer-to-pointer approach has downsides:

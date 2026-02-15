@@ -23,6 +23,14 @@ void dynamicArrays() {
     //     2. Copy existing elements into it
     //     3. Delete the old array
     //   This is exactly what std::vector does behind the scenes!
+    //
+    // ! DISCUSSION: "Wait — didn't we just learn smart pointers are better?"
+    //   Yes! In your own code, prefer smart pointers and std::vector.
+    //   Here we use raw new/delete ON PURPOSE because we're building
+    //   the internals of a container — this is what std::vector does
+    //   under the hood. You need to understand this level so you can
+    //   debug containers, implement data structures (linked lists,
+    //   trees), and work with APIs that hand you raw pointers.
 
     // --- 1. Setting up a dynamic array ---
     std::cout << "\n--- 1. Initial Dynamic Array ---" << '\n';
@@ -75,15 +83,16 @@ void dynamicArrays() {
     //   We DOUBLE the capacity each time we run out of space.
     //   Why double instead of adding 1?
     //     - Adding 1: resize on EVERY insertion → O(n) copies each time
-    //     - Doubling: resize rarely → O(1) amortized per insertion
+    //     - Doubling: resize rarely → O(1) on average per insertion
     //   This is the same strategy std::vector uses. The tradeoff is
     //   we may waste up to half the allocated space, but the time
     //   savings are enormous for large arrays.
     //
-    //   The O(n) and O(1) notation above is called "Big O" — a way to
-    //   describe how an algorithm's cost grows as the input gets larger.
-    //   We'll formalize Big O when we hit linked lists, where the
-    //   contrast with arrays makes it really click.
+    //   The O(n) and O(1) notation above is called "Big O" (said
+    //   "big-oh of n" and "big-oh of one") — a way to describe how an
+    //   algorithm's cost grows as the input gets larger. We'll formalize
+    //   Big O when we hit linked lists, where the contrast with arrays
+    //   makes it really click.
 
     std::cout << "Array is full (count == capacity). Need to resize!" << '\n';
 
@@ -98,12 +107,11 @@ void dynamicArrays() {
     // Step 3: Copy existing elements from old to new
     // TODO: Use a for loop to copy arr[i] to newArr[i] for each existing element
     //
-    // ! DISCUSSION: Why copy manually instead of memcpy?
-    //   For plain ints, memcpy works fine. But for objects with
-    //   constructors/destructors (like std::string), you MUST use
-    //   proper copying (assignment operator or std::copy) so that
-    //   objects are correctly constructed in the new location.
-    //   Getting in the habit of loop-copying is safer.
+    // ! DISCUSSION: Why use a loop instead of a bulk copy?
+    //   For plain ints a raw byte copy would work, but for objects
+    //   with constructors/destructors (like std::string) you MUST
+    //   use proper assignment so each object is correctly constructed
+    //   in the new location. Loop-copying is the safe, general habit.
 
     std::cout << "Copied " << count << " elements to new array" << '\n';
 
@@ -122,6 +130,13 @@ void dynamicArrays() {
     // ! DISCUSSION: After arr = newArr, both pointers refer to the same memory.
     //   We don't delete newArr separately — arr now "owns" it.
     //   We just moved ownership from the old block to the new one.
+    //
+    //   "Don't we need to set newArr to nullptr too?"
+    //   No — newArr is a local variable that we never use again after
+    //   this line. It's NOT dangling: the memory it points to is still
+    //   alive (arr is using it). Setting it to nullptr would be harmless
+    //   but pointless. We only nullptr a pointer when we might
+    //   accidentally use it later — newArr just falls out of scope.
 
     std::cout << "Resized!";
     // TODO: Call printArray to display the state
