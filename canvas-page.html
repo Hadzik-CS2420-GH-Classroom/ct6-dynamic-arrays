@@ -1,0 +1,267 @@
+<!-- Canvas LMS HTML Fragment — paste into the Rich Content Editor (HTML view) -->
+
+<h2>&#x1F468;&#x200D;&#x1F4BB; Code-Together 6 &#x2014; Building a Simple Dynamic Array (Resize + Copy)</h2>
+
+<h3>&#x1F3AF; Overview</h3>
+<p>In this in-class activity, you&#x2019;ll build the core algorithm behind <code>std::vector</code>: allocating arrays on the heap, resizing when full, and managing memory with <code>new[]</code>/<code>delete[]</code>. You&#x2019;ll also explore smart pointers and dynamic 2D arrays.</p>
+
+<h3>&#x1F4D6; Learning Objectives</h3>
+<p>By completing this activity, you will be able to:</p>
+<ul>
+    <li>Allocate and free <strong>heap arrays</strong> with <code>new[]</code> and <code>delete[]</code></li>
+    <li>Explain <strong>dangling pointers</strong> and why we set pointers to <code>nullptr</code> after deleting</li>
+    <li>Use <strong>smart pointers</strong> (<code>unique_ptr</code>, <code>shared_ptr</code>) for automatic memory management</li>
+    <li>Implement the <strong>resize + copy</strong> pattern &mdash; double capacity, allocate, copy, delete old</li>
+    <li>Distinguish <strong>count vs capacity</strong> in a dynamic array</li>
+    <li>Build a <strong>dynamic 2D array</strong> using pointer-to-pointer (<code>int**</code>) and free it in the correct order</li>
+    <li>Use a <strong>flat array as 2D</strong> with index math (<code>row * cols + col</code>) as a better alternative</li>
+</ul>
+
+<h3>&#x1F680; Getting Started</h3>
+
+<h4>Step 1: Accept the Assignment</h4>
+<p>Click the button below to create your personal repository:</p>
+<p><a style="display: inline-block; padding: 10px 24px; font-size: 1em; font-weight: 600; color: #fff; background-color: #0b874b; border-radius: 4px; text-decoration: none;" href="https://classroom.github.com/a/PLACEHOLDER" target="_blank" rel="noopener">Accept Assignment on GitHub</a></p>
+
+<div style="padding: 14px 18px; border-radius: 4px; margin-bottom: 16px; background-color: #fcf8e3; border: 1px solid #faebcc; color: #8a6d3b;">
+    <strong>Repository Access Issue?</strong><br />
+    If you don&#x2019;t see the repository after accepting, check your email for the GitHub invite.
+</div>
+
+<h4>Step 2: Clone in Visual Studio</h4>
+<ol>
+    <li>Open <strong>Visual Studio</strong></li>
+    <li>On the start window, click <strong>&#x201C;Clone a repository&#x201D;</strong></li>
+    <li>Paste your repository URL (from GitHub) into the <strong>Repository location</strong> field</li>
+    <li>Choose a local path and click <strong>Clone</strong></li>
+    <li>Visual Studio should automatically detect the CMake project and configure it</li>
+</ol>
+
+<div style="padding: 14px 18px; border-radius: 4px; margin-bottom: 16px; background-color: #d9edf7; border: 1px solid #bce8f1; color: #31708f;">
+    Follow the <strong>Troubleshooting</strong> section at the bottom if CMake does not configure automatically.
+</div>
+
+<h4>Step 3: Wait for CMake Configuration</h4>
+<p>Visual Studio will automatically run CMake. Watch the <strong>Output</strong> window (<em>View &rarr; Output</em>, select <em>&#x201C;Show output from: CMake&#x201D;</em>) until you see:</p>
+<pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 16px 20px; border-radius: 4px; overflow-x: auto; font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace; font-size: 0.875em; line-height: 1.6;">CMake generation finished.</pre>
+
+<h3>&#x1F4C1; Project Structure</h3>
+<pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 16px 20px; border-radius: 4px; font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier New', monospace; font-size: 0.875em; line-height: 1.8;"><span style="color: #569cd6;">ct6-dynamic-arrays/</span>
+  <span style="color: #569cd6;">src/</span>
+    <span style="color: #ce9178;">main.cpp</span>                       <span style="color: #6a9955;">&larr; calls all three functions in order</span>
+    <span style="color: #4ec9b0;">new_and_delete.cpp</span>             <span style="color: #6a9955;">&larr; YOUR WORK: 13 TODOs</span>
+    <span style="color: #4ec9b0;">dynamic_arrays.cpp</span>             <span style="color: #6a9955;">&larr; YOUR WORK: 18 TODOs</span>
+    <span style="color: #4ec9b0;">two_dimensional_arrays.cpp</span>     <span style="color: #6a9955;">&larr; YOUR WORK: 11 TODOs</span>
+  <span style="color: #569cd6;">include/</span>
+    <span style="color: #ce9178;">*.h</span>                            <span style="color: #6a9955;">&larr; header files (do NOT modify)</span>
+  <span style="color: #569cd6;">images/</span>
+    <span style="color: #ce9178;">*.png</span>                          <span style="color: #6a9955;">&larr; diagrams referenced in comments</span>
+    <span style="color: #569cd6;">svg/</span>
+      <span style="color: #ce9178;">*.svg</span>                        <span style="color: #6a9955;">&larr; diagram source files</span>
+  <span style="color: #ce9178;">CMakeLists.txt</span></pre>
+
+<h3>&#x1F4DD; What You&#x2019;ll Do</h3>
+<p>Open each source file and complete the <code>TODO</code> comments. Each TODO tells you what to write, and the <strong>DISCUSSION</strong> comments explain the &#x201C;why&#x201D; behind the code. We&#x2019;ll work through these together in class.</p>
+
+<h3>&#x1F4DA; Teaching Order</h3>
+<p>Work through the files in the order <code>main.cpp</code> calls them:</p>
+
+<h4>1. <code>new_and_delete.cpp</code> &mdash; Foundation (13 TODOs)</h4>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Section</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">What You&#x2019;ll Learn</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Heap arrays with <code>new[]</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Runtime-sized arrays on the heap, stack vs heap</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Freeing with <code>delete[]</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Matching <code>new[]</code> with <code>delete[]</code>, dangling pointers, <code>nullptr</code></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>unique_ptr</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Automatic cleanup, <code>make_unique</code>, array support</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>shared_ptr</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Shared ownership, reference counting</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>2. <code>dynamic_arrays.cpp</code> &mdash; The Big Picture (18 TODOs)</h4>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Section</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">What You&#x2019;ll Learn</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Initial dynamic array</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Capacity vs count, allocating with <code>new</code></td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Adding elements</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Filling the array, hitting capacity</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Resizing</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Double capacity, allocate new, copy, delete old</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Adding after resize</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Using the extra capacity</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Cleanup</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Freeing the final array</td>
+        </tr>
+    </tbody>
+</table>
+
+<h4>3. <code>two_dimensional_arrays.cpp</code> &mdash; Applying new/delete in 2D (11 TODOs)</h4>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Section</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">What You&#x2019;ll Learn</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Static 2D arrays</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Quick review of stack-based <code>int grid[2][3]</code></td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Dynamic 2D arrays</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Pointer-to-pointer (<code>int**</code>), allocating spine + rows</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Freeing 2D arrays</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Reverse order: rows first, then spine</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Flat array as 2D</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Single allocation with index math (<code>row * cols + col</code>)</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>&#x1F5BC;&#xFE0F; Diagrams</h3>
+<p>Eight diagrams are included in the <code>images/</code> folder and referenced in the source code comments. These help visualize what&#x2019;s happening in memory:</p>
+
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Diagram</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; text-align: left; background-color: #f5f5f5; font-weight: 700;">Shows</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>delete_and_nullptr.png</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Valid pointer &rarr; dangling pointer after <code>delete[]</code> &rarr; safe state after <code>nullptr</code></td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>unique_ptr.png</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Exclusive ownership, <code>make_unique</code> under the hood, automatic cleanup</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>shared_ptr.png</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Shared ownership, <code>make_shared</code> under the hood, reference counting</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>resize_copy.png</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">3-step resize lifecycle: full &rarr; allocate/copy/delete &rarr; room to grow</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>static_2d_array.png</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Conceptual grid vs actual flat memory layout for <code>int grid[2][3]</code></td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>two_d_spine.png</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Step 1: spine allocation &mdash; array of uninitialized pointers</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>two_d_rows.png</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Step 2: full picture after row allocation + delete order</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>two_d_flat.png</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Flat array layout, index formula, pointer-to-pointer vs flat comparison</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>&#x1F4CA; Grading (50 points)</h3>
+<p>Your code is auto-graded by GitHub Classroom when you push. Tests check that each TODO produces the correct output.</p>
+<table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+    <thead>
+        <tr>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; background-color: #f5f5f5; font-weight: 700;">Category</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; background-color: #f5f5f5; font-weight: 700;">Points</th>
+            <th style="border: 1px solid #c7cdd1; padding: 10px 14px; background-color: #f5f5f5; font-weight: 700;">What is tested</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Build</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">2</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Project compiles without errors</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>new_and_delete.cpp</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">14</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Heap arrays, <code>delete[]</code> + <code>nullptr</code>, <code>unique_ptr</code>, <code>shared_ptr</code></td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>dynamic_arrays.cpp</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">22</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Initial array, adding elements, resize + copy, adding after resize, cleanup</td>
+        </tr>
+        <tr style="background-color: #fafafa;">
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;"><code>two_dimensional_arrays.cpp</code></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">12</td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px;">Dynamic 2D array (spine + rows), freeing, flat array as 2D</td>
+        </tr>
+        <tr>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px; font-weight: 700; background-color: #f5f5f5;"><strong>Total</strong></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px; font-weight: 700; background-color: #f5f5f5;"><strong>50</strong></td>
+            <td style="border: 1px solid #c7cdd1; padding: 10px 14px; background-color: #f5f5f5;"></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>&#x1F527; Troubleshooting</h3>
+
+<h4>CMake does not configure automatically</h4>
+<ol>
+    <li>Make sure you have <strong>Desktop development with C++</strong> workload installed in Visual Studio</li>
+    <li>Go to <em>Project &rarr; CMake Settings</em> and ensure the configuration is correct</li>
+    <li>Try <em>Project &rarr; Delete Cache and Reconfigure</em></li>
+    <li>Verify that <code>CMakeLists.txt</code> is in the root of your cloned repository</li>
+</ol>
+
+<h4>Tests fail to build</h4>
+<ul>
+    <li>Google Test is fetched automatically via CMake&#x2019;s <code>FetchContent</code> &mdash; make sure you have an internet connection during the first build</li>
+    <li>Do <strong>not</strong> modify header files in the <code>include/</code> folder</li>
+</ul>
+
+<h4>Running the Program</h4>
+<ol>
+    <li>In Visual Studio, select <code>ct6-dynamic-arrays.exe</code> as the startup item from the dropdown</li>
+    <li>Press <strong>Ctrl+F5</strong> to run without debugging</li>
+    <li>You should see output from each section as you complete the TODOs</li>
+</ol>
+
+<div style="padding: 14px 18px; border-radius: 4px; margin-bottom: 16px; background-color: #dff0d8; border: 1px solid #d6e9c6; color: #3c763d;">
+    <strong>Tip:</strong> Look for the <code>// ! DISCUSSION:</code> comments in each file &mdash; these explain the &#x201C;why&#x201D; behind each concept. The <code>// ? SEE DIAGRAM:</code> comments point you to visual aids in the <code>images/</code> folder.
+</div>
