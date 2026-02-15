@@ -47,8 +47,11 @@ SVG sources are in `images/svg/`, PNG exports in `images/`.
 | `delete_and_nullptr` | `new_and_delete.cpp` | 3-step visual: valid pointer → dangling pointer after `delete[]` → safe state after `nullptr` |
 | `unique_ptr` | `new_and_delete.cpp` | Exclusive ownership, `make_unique` under the hood, move semantics, automatic cleanup |
 | `shared_ptr` | `new_and_delete.cpp` | Shared ownership, `make_shared` under the hood, reference counting lifecycle |
-| `two_d_array_memory` | `two_dimensional_arrays.cpp` | Pointer-to-pointer vs flat array memory layout, delete order, index math |
 | `resize_copy` | `dynamic_arrays.cpp` | 3-step resize lifecycle: full → allocate/copy/delete → room to grow |
+| `static_2d_array` | `two_dimensional_arrays.cpp` | Conceptual grid vs actual flat memory layout for `int grid[2][3]` |
+| `two_d_spine` | `two_dimensional_arrays.cpp` | Step 1: spine allocation — array of uninitialized pointers |
+| `two_d_rows` | `two_dimensional_arrays.cpp` | Step 2: full picture after row allocation + delete order |
+| `two_d_flat` | `two_dimensional_arrays.cpp` | Flat array layout, index formula, pointer-to-pointer vs flat comparison |
 
 ## Comment Conventions
 
